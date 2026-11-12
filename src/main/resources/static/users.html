@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پنل مدیریت</title>
+
+    <link rel="stylesheet" href="css/users.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="logo-icon">⚡</span>
+                <div>
+                    <h2>پنل مدیریت</h2>
+                    <span>مدیریت سیستم</span>
+                </div>
+            </div>
+
+            <button id="closeSidebarButton"
+                    class="close-sidebar-button"
+                    type="button">
+                ×
+            </button>
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <div class="menu-title">
+                مدیریت
+            </div>
+
+            <button id="usersMenuButton"
+                    class="menu-item active"
+                    type="button">
+
+                <span class="menu-icon">👥</span>
+                <span>کاربران</span>
+
+            </button>
+
+
+            <button id="addUserMenuButton"
+                    class="menu-item"
+                    type="button">
+
+                <span class="menu-icon">➕</span>
+                <span>افزودن کاربر</span>
+
+            </button>
+
+
+            <button id="changePasswordMenuButton"
+                    class="menu-item"
+                    type="button">
+
+                <span class="menu-icon">🔑</span>
+                <span>تغییر رمز عبور</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button id="logoutButton"
+                    class="logout-menu-item"
+                    type="button">
+
+                <span class="menu-icon">🚪</span>
+                <span>خروج</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-content">
+
+        <!-- Top Header -->
+        <header class="top-header">
+
+            <button id="openSidebarButton"
+                    class="hamburger-button"
+                    type="button"
+                    aria-label="باز کردن منو">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <div class="page-header">
+
+                <h1 id="pageTitle">
+                    مدیریت کاربران
+                </h1>
+
+                <p id="pageSubtitle">
+                    مدیریت کاربران سیستم
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= GLOBAL MESSAGE ================= -->
+        <div id="globalMessage" class="global-message"></div>
+
+
+        <!-- ================= USERS SECTION ================= -->
+        <section id="usersSection" class="content-section active">
+
+            <div class="section-card">
+
+                <div class="section-card-header">
+
+                    <div>
+                        <h2>لیست کاربران</h2>
+                        <p>
+                            کاربران ثبت‌شده در سیستم را مدیریت کنید.
+                        </p>
+                    </div>
+
+                    <button id="addUserButton"
+                            class="primary-button"
+                            type="button">
+
+                        <span>+</span>
+                        افزودن کاربر
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="users-table">
+
+                        <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>نام کاربری</th>
+                            <th class="actions-column">عملیات</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="usersTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- Empty state -->
+                <div id="emptyUsers"
+                     class="empty-state"
+                     style="display: none;">
+
+                    <div class="empty-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        کاربری وجود ندارد
+                    </h3>
+
+                    <p>
+                        هنوز هیچ کاربری در سیستم ثبت نشده است.
+                    </p>
+
+                    <button id="emptyAddUserButton"
+                            class="primary-button"
+                            type="button">
+
+                        + افزودن اولین کاربر
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHANGE PASSWORD SECTION ================= -->
+        <section id="changePasswordSection"
+                 class="content-section">
+
+            <div class="section-card change-password-card">
+
+                <div class="section-card-header">
+
+                    <div>
+                        <h2>تغییر رمز عبور</h2>
+                        <p>
+                            رمز عبور حساب کاربری خود را تغییر دهید.
+                        </p>
+                    </div>
+
+                    <div class="password-icon">
+                        🔐
+                    </div>
+
+                </div>
+
+
+                <form id="changePasswordForm"
+                      class="change-password-form"
+                      novalidate>
+
+                    <div class="form-group">
+
+                        <label for="currentPassword">
+                            رمز عبور فعلی
+                        </label>
+
+                        <div class="password-input-wrapper">
+
+                            <input type="password"
+                                   id="currentPassword"
+                                   name="currentPassword"
+                                   autocomplete="current-password">
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    data-target="currentPassword"
+                                    aria-label="نمایش رمز عبور">
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="newPassword">
+                            رمز عبور جدید
+                        </label>
+
+                        <div class="password-input-wrapper">
+
+                            <input type="password"
+                                   id="newPassword"
+                                   name="newPassword"
+                                   autocomplete="new-password">
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    data-target="newPassword"
+                                    aria-label="نمایش رمز عبور">
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            تکرار رمز عبور جدید
+                        </label>
+
+                        <div class="password-input-wrapper">
+
+                            <input type="password"
+                                   id="confirmPassword"
+                                   name="confirmPassword"
+                                   autocomplete="new-password">
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    data-target="confirmPassword"
+                                    aria-label="نمایش رمز عبور">
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-rules">
+
+                        <div class="rules-title">
+                            رمز عبور جدید باید شامل موارد زیر باشد:
+                        </div>
+
+                        <ul>
+                            <li>حداقل یک حرف بزرگ انگلیسی</li>
+                            <li>حداقل یک حرف کوچک انگلیسی</li>
+                            <li>حداقل یک عدد</li>
+                            <li>حداقل یک کاراکتر خاص</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div id="changePasswordMessage"
+                         class="form-message">
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button id="changePasswordButton"
+                                class="primary-button"
+                                type="submit">
+
+                            تغییر رمز عبور
+
+                        </button>
+
+                        <button id="clearPasswordButton"
+                                class="secondary-button"
+                                type="button">
+
+                            پاک کردن
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= ADD / EDIT USER MODAL ================= -->
+<div id="userModal"
+     class="modal"
+     aria-hidden="true">
+
+    <div class="modal-overlay"></div>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">
+                    افزودن کاربر
+                </h2>
+
+                <p>
+                    اطلاعات کاربر را وارد کنید.
+                </p>
+            </div>
+
+            <button id="closeModalButton"
+                    class="modal-close"
+                    type="button">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="userForm"
+              novalidate>
+
+            <div class="form-group">
+
+                <label for="firstName">
+                    نام
+                </label>
+
+                <input type="text"
+                       id="firstName"
+                       name="firstName"
+                       autocomplete="given-name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="lastName">
+                    نام خانوادگی
+                </label>
+
+                <input type="text"
+                       id="lastName"
+                       name="lastName"
+                       autocomplete="family-name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="userName">
+                    نام کاربری
+                </label>
+
+                <input type="text"
+                       id="userName"
+                       name="userName"
+                       autocomplete="username">
+
+            </div>
+
+
+            <div id="passwordFormGroup"
+                 class="form-group">
+
+                <label for="password">
+                    رمز عبور
+                </label>
+
+                <input type="password"
+                       id="password"
+                       name="password"
+                       autocomplete="new-password">
+
+            </div>
+
+
+            <div id="modalMessage"
+                 class="modal-message">
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button id="cancelButton"
+                        class="secondary-button"
+                        type="button">
+
+                    انصراف
+
+                </button>
+
+                <button id="saveUserButton"
+                        class="primary-button"
+                        type="submit">
+
+                    ذخیره کاربر
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= DELETE MODAL ================= -->
+<div id="deleteModal"
+     class="modal"
+     aria-hidden="true">
+
+    <div class="modal-overlay"></div>
+
+    <div class="modal-content delete-modal">
+
+        <div class="delete-icon">
+            !
+        </div>
+
+        <h2>
+            حذف کاربر
+        </h2>
+
+        <p id="deleteMessage">
+            آیا از حذف این کاربر مطمئن هستید؟
+        </p>
+
+
+        <div class="modal-actions">
+
+            <button id="cancelDeleteButton"
+                    class="secondary-button"
+                    type="button">
+
+                انصراف
+
+            </button>
+
+            <button id="confirmDeleteButton"
+                    class="danger-button"
+                    type="button">
+
+                حذف کاربر
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/users.js"></script>
+
+</body>
+</html>
